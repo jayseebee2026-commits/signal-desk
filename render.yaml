@@ -1,0 +1,22 @@
+# Render blueprint: deploy Signal as a single free web service.
+# The backend serves the built frontend, so one service hosts everything.
+# In Render: New + -> Blueprint -> pick this repo. That's it.
+services:
+  - type: web
+    name: signal-desk
+    runtime: node
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build && cd ../backend && npm install
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      # Injects this service's own hostname (e.g. signal-desk.onrender.com);
+      # the server prepends https:// automatically.
+      - key: FRONTEND_URL
+        fromService:
+          name: signal-desk
+          type: web
+          property: host

@@ -1,0 +1,18 @@
+{
+  "name": "signal-backend",
+  "version": "0.2.0",
+  "description": "Backend for Signal — handles OAuth connections and posting to social platforms on behalf of the Signal dashboard.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
+  }
+}
